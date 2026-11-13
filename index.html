@@ -232,6 +232,13 @@ section.tight{padding-top:8px}
 .pcard em{font-style:normal;font-size:13.5px;color:var(--beacon);display:block;margin-top:2px}
 
 .pcard a{display:block}
+.pgrid.mail{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:14px}
+.pgrid.mail .pcard a{font-size:18px;white-space:normal;word-break:break-word}
+.pcard em.addr{color:#B9CDD0;margin-top:6px}
+.ulinks{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 28px}
+.ulinks li{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.14);display:grid;gap:2px}
+.ulinks a{color:var(--beacon);font-weight:600;font-size:17px;text-underline-offset:4px}
+.ulinks span{color:#C9DADD;font-size:15px}
 .site-links{margin-top:30px;padding-top:26px;border-top:1px solid rgba(255,255,255,.18)}
 .site-links h3{color:#fff}
 .site-links p{color:#C9DADD;margin-top:8px;max-width:38em}
@@ -473,13 +480,28 @@ dialog::backdrop{background:rgba(8,32,38,.6)}
       <div class="pcard"><span>Дальнегорск</span><a href="tel:+79240093239">+7 924 009-32-39</a></div>
     </div>
     <div class="site-links">
-      <h3>Официальный сайт содружества</h3>
-      <p>Все данные на этой странице взяты с сайта Анонимных Алкоголиков Приморского края. Там же новости, литература и полные контакты.</p>
-      <div class="hero-links">
-        <a class="btn primary" href="https://aa25.ru/" target="_blank" rel="noopener">aa25.ru</a>
-        <a class="btn ghost" href="https://aa25.ru/cont/" target="_blank" rel="noopener">Все контакты на aa25.ru</a>
-        <a class="btn ghost" href="mailto:aavladivostock@yandex.ru">aavladivostock@yandex.ru</a>
+      <h3>Почта</h3>
+      <div class="pgrid mail">
+        <div class="pcard"><span>Почта содружества</span><a href="mailto:aavladivostock@yandex.ru">aavladivostock@yandex.ru</a></div>
+        <div class="pcard"><span>Сайт aa25.ru</span><a href="mailto:admin@aa25.ru">admin@aa25.ru</a></div>
+        <div class="pcard"><span>Служба переписки АА России</span><a href="mailto:perepiska@rsoaa.ru">perepiska@rsoaa.ru</a><em class="addr">Почтовый адрес: 101000 Москва, а/я 710, Фонд «Единство»</em></div>
       </div>
+    </div>
+    <div class="site-links">
+      <h3>Полезные ссылки</h3>
+      <ul class="ulinks">
+        <li><a href="https://aa25.ru/" target="_blank" rel="noopener">aa25.ru</a><span>Официальный сайт содружества Приморского края. Все данные на этой странице взяты с него</span></li>
+        <li><a href="https://aaprim.ru/cont/" target="_blank" rel="noopener">aaprim.ru</a><span>Зеркало сайта aa25.ru</span></li>
+        <li><a href="https://disk.yandex.ru/d/HgCL3tzC4qXAdA" target="_blank" rel="noopener">Материалы для информирования общественности</a><span>Утверждены на комитете по обслуживанию АА г. Владивостока и готовы к тиражированию</span></li>
+        <li><a href="https://khv.aarussia.ru/" target="_blank" rel="noopener">khv.aarussia.ru</a><span>Анонимные Алкоголики Хабаровска</span></li>
+        <li><a href="https://aarus.ru/" target="_blank" rel="noopener">aarus.ru</a><span>Фонд обслуживания Анонимных Алкоголиков (ФОАА)</span></li>
+        <li><a href="https://aarussia.ru/" target="_blank" rel="noopener">aarussia.ru</a><span>Фонд поддержки движения Анонимных Алкоголиков «Единство»</span></li>
+        <li><a href="https://www.aa.org/" target="_blank" rel="noopener">aa.org</a><span>Анонимные Алкоголики США</span></li>
+        <li><a href="https://al-anon.org.ru/" target="_blank" rel="noopener">al-anon.org.ru</a><span>Ал-Анон и Алатин России: содружество родственников и друзей алкоголиков</span></li>
+        <li><a href="https://aa25.ru/al-anon/" target="_blank" rel="noopener">Группы Ал-Анон во Владивостоке</a><span>Расписание на сайте aa25.ru</span></li>
+        <li><a href="http://radioaa.ru/" target="_blank" rel="noopener">radioaa.ru</a><span>Круглосуточное интернет-вещание в поддержку людей, желающих освободиться от алкогольной зависимости</span></li>
+        <li><a href="https://aa24.online/" target="_blank" rel="noopener">aa24.online</a><span>Круглосуточные онлайн-собрания АА каждый чётный час по Москве</span></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -556,7 +578,7 @@ dialog::backdrop{background:rgba(8,32,38,.6)}
   </div>
 </footer>
 
-<nav class="tabbar" aria-label="Разделы"><a href="#home" data-tab="home"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1Z"/></svg><span>Главная</span></a><a href="#schedule" data-tab="schedule"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg><span>Расписание</span></a><a href="#online" data-tab="online"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="12" height="12" rx="2"/><path d="m15 10 6-3v10l-6-3"/></svg><span>Онлайн</span></a><a href="#newcomer" data-tab="newcomer"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/></svg><span>Об АА</span></a><a href="#phones" data-tab="phones"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2Z"/></svg><span>Телефоны</span></a></nav>
+<nav class="tabbar" aria-label="Разделы"><a href="#home" data-tab="home"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1Z"/></svg><span>Главная</span></a><a href="#schedule" data-tab="schedule"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg><span>Расписание</span></a><a href="#online" data-tab="online"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="12" height="12" rx="2"/><path d="m15 10 6-3v10l-6-3"/></svg><span>Онлайн</span></a><a href="#newcomer" data-tab="newcomer"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/></svg><span>Об АА</span></a><a href="#phones" data-tab="phones"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2Z"/></svg><span>Контакты</span></a></nav>
 
 <dialog id="dlg" aria-labelledby="dlg-name">
   <div class="dlg-head">
