@@ -62,6 +62,10 @@ nav.main a[aria-current="page"]{background:rgba(255,255,255,.16);opacity:1}
 .daily.loaded{flex-direction:column;align-items:flex-start}
 .daily-title{font-size:22px;font-weight:600;color:#fff;margin-top:14px}
 .daily-body{margin-top:12px;max-width:42em;display:grid;gap:12px;font-size:17px;line-height:1.6;color:#E3EDEE}
+.daily-title{text-transform:none}
+.daily-quote{margin:0;padding:4px 0 4px 18px;border-left:4px solid var(--beacon);display:grid;gap:6px}
+.daily-quote p{font-style:italic;font-size:18px;line-height:1.5;color:#fff}
+.daily-quote p.daily-cite{font-style:normal;font-size:14.5px;color:#9DB6BA;line-height:1.4}
 .daily-src{font-size:14px;color:#9DB6BA}
 .about-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:34px;align-items:start}
 .about-lead{font-size:19px;margin-top:14px;max-width:34em}
@@ -885,13 +889,30 @@ renderCal();
    .then(list=>{
      if(!list||!list.length) return;
      const post=list[0], doc=new DOMParser().parseFromString(post.content.rendered||"","text/html");
-     let parts=[...doc.body.querySelectorAll("p,blockquote,h2,h3,h4,li")].filter(el=>!el.querySelector("p")).map(el=>el.textContent.trim()).filter(Boolean);
-     if(!parts.length){const t=doc.body.textContent.trim(); if(t) parts=[t];}
-     if(!parts.length) return;
+     // строки элемента с учётом переносов <br>
+     const lines=el=>{const c=el.cloneNode(true);c.querySelectorAll("br").forEach(x=>x.replaceWith("\n"));c.querySelectorAll("p").forEach(x=>x.append("\n"));return c.textContent.split("\n").map(t=>t.trim()).filter(Boolean)};
+     const blocks=[]; let heading="";
+     doc.body.querySelectorAll("h1,h2,h3,h4,h5,blockquote,p,li").forEach(el=>{
+       if(el.tagName!=="BLOCKQUOTE"&&el.closest("blockquote")) return;      // абзацы внутри цитаты берём вместе с ней
+       const ls=lines(el); if(!ls.length) return;
+       if(/^H\d$/.test(el.tagName)){ if(!heading) heading=ls.join(" "); else blocks.push({k:"p",ls}); }
+       else blocks.push({k:el.tagName==="BLOCKQUOTE"?"q":"p",ls});
+     });
+     if(!blocks.length){const t=doc.body.textContent.trim(); if(t) blocks.push({k:"p",ls:[t]});}
+     if(!blocks.length) return;
      const body=$("#daily-body"); body.innerHTML="";
-     const title=new DOMParser().parseFromString(post.title.rendered||"","text/html").body.textContent.trim();
+     const dateTxt=$("#daily-date").textContent.trim().toLowerCase();
+     const ptitle=new DOMParser().parseFromString(post.title.rendered||"","text/html").body.textContent.trim();
+     const title=heading||(ptitle.toLowerCase()!==dateTxt?ptitle:"");     // заголовок записи часто равен дате: не повторяем её
      if(title){const h=document.createElement("p");h.className="daily-title";h.textContent=title;body.before(h);}
-     parts.forEach(t=>{const p=document.createElement("p");p.textContent=t;body.append(p)});   // только текст, без разметки с чужого сайта
+     const isSrc=t=>/(^|\s)(с|стр|p|pp)\.\s*\d+/i.test(t)&&t.length<90;
+     blocks.forEach(bl=>{
+       if(bl.k==="q"){
+         const q=document.createElement("blockquote");q.className="daily-quote";
+         bl.ls.forEach(t=>{const p=document.createElement("p");p.textContent=t;if(isSrc(t))p.className="daily-cite";q.append(p)});
+         body.append(q);
+       } else bl.ls.forEach(t=>{const p=document.createElement("p");p.textContent=t;body.append(p)});
+     });
      const src=document.createElement("p");src.className="daily-src";src.textContent="Текст загружен с сайта aa25.ru";body.append(src);
      body.hidden=false; $("#daily-hint").hidden=true; document.querySelector(".daily").classList.add("loaded");
      if(post.link&&/^https:\/\/aa25\.ru\//.test(post.link)) link.href=post.link;
