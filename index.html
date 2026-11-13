@@ -59,6 +59,10 @@ nav.main a[aria-current="page"]{background:rgba(255,255,255,.16);opacity:1}
 .daily h2{color:#fff;font-size:clamp(24px,3.4vw,32px)}
 .daily-k{color:var(--beacon);font-weight:600;font-size:15px;margin-bottom:4px}
 .daily-t{color:#C9DADD;margin-top:8px;max-width:34em;font-size:16px}
+.daily.loaded{flex-direction:column;align-items:flex-start}
+.daily-title{font-size:22px;font-weight:600;color:#fff;margin-top:14px}
+.daily-body{margin-top:12px;max-width:42em;display:grid;gap:12px;font-size:17px;line-height:1.6;color:#E3EDEE}
+.daily-src{font-size:14px;color:#9DB6BA}
 .about-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:34px;align-items:start}
 .about-lead{font-size:19px;margin-top:14px;max-width:34em}
 .facts{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
@@ -469,7 +473,8 @@ dialog::backdrop{background:rgba(8,32,38,.6)}
       <div>
         <p class="daily-k">Ежедневное размышление</p>
         <h2 id="daily-date">На сегодня</h2>
-        <p class="daily-t">Короткий текст на каждый день года. Многие члены содружества начинают с него утро.</p>
+        <p class="daily-t" id="daily-hint">Короткий текст на каждый день года. Многие члены содружества начинают с него утро.</p>
+        <div class="daily-body" id="daily-body" hidden></div>
       </div>
       <a class="btn primary" id="daily-link" href="https://aa25.ru/" target="_blank" rel="noopener">Читать на aa25.ru</a>
     </div>
@@ -865,11 +870,33 @@ $("#cal-next").onclick=()=>{cal.mo++; if(cal.mo>11){cal.mo=0;cal.y++} renderCal(
 })();
 renderCal();
 /* ---------- РАЗМЫШЛЕНИЕ НА СЕГОДНЯ ---------- */
+// Текст не хранится в этом файле: страница при открытии запрашивает сегодняшнюю запись у aa25.ru.
 (function(){
   const x=new Date(Date.now()+VL_OFFSET*3600e3);            // дата во Владивостоке
-  const MG=["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
-  $("#daily-date").textContent=x.getUTCDate()+" "+MG[x.getUTCMonth()];
-  $("#daily-link").href="https://aa25.ru/"+x.getUTCFullYear()+"/"+pad(x.getUTCMonth()+1)+"/"+pad(x.getUTCDate())+"/";
+  const iso=d=>d.getUTCFullYear()+"-"+pad(d.getUTCMonth()+1)+"-"+pad(d.getUTCDate());
+  const prev=new Date(x.getTime()-864e5);
+  $("#daily-date").textContent=x.getUTCDate()+" "+MGEN[x.getUTCMonth()];
+  const link=$("#daily-link");
+  link.href="https://aa25.ru/"+x.getUTCFullYear()+"/"+pad(x.getUTCMonth()+1)+"/"+pad(x.getUTCDate())+"/";
+  if(!window.fetch||!window.DOMParser) return;
+  const ctl=window.AbortController?new AbortController():null; if(ctl) setTimeout(()=>ctl.abort(),10000);
+  fetch("https://aa25.ru/wp-json/wp/v2/posts?after="+iso(prev)+"T23:59:59&before="+iso(x)+"T23:59:59&per_page=1&_fields=title,content,link",ctl?{signal:ctl.signal}:{})
+   .then(r=>r.ok?r.json():Promise.reject())
+   .then(list=>{
+     if(!list||!list.length) return;
+     const post=list[0], doc=new DOMParser().parseFromString(post.content.rendered||"","text/html");
+     let parts=[...doc.body.querySelectorAll("p,blockquote,h2,h3,h4,li")].filter(el=>!el.querySelector("p")).map(el=>el.textContent.trim()).filter(Boolean);
+     if(!parts.length){const t=doc.body.textContent.trim(); if(t) parts=[t];}
+     if(!parts.length) return;
+     const body=$("#daily-body"); body.innerHTML="";
+     const title=new DOMParser().parseFromString(post.title.rendered||"","text/html").body.textContent.trim();
+     if(title){const h=document.createElement("p");h.className="daily-title";h.textContent=title;body.before(h);}
+     parts.forEach(t=>{const p=document.createElement("p");p.textContent=t;body.append(p)});   // только текст, без разметки с чужого сайта
+     const src=document.createElement("p");src.className="daily-src";src.textContent="Текст загружен с сайта aa25.ru";body.append(src);
+     body.hidden=false; $("#daily-hint").hidden=true; document.querySelector(".daily").classList.add("loaded");
+     if(post.link&&/^https:\/\/aa25\.ru\//.test(post.link)) link.href=post.link;
+     link.textContent="Открыть на aa25.ru"; link.className="btn ghost small";
+   }).catch(()=>{});                                         // нет сети или сайт не ответил: остаётся кнопка-ссылка
 })();
 /* ---------- ВКЛАДКИ ---------- */
 const VIEWS=["home","schedule","online","newcomer","calendar","phones","committee"];
