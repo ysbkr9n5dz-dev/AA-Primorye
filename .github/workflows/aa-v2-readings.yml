@@ -1,0 +1,31 @@
+name: Update daily reflections for website v2
+on:
+  schedule:
+    - cron: '15 14,16 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: aa-v2-daily-reflections
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Refresh AA25 reflections
+        run: python3 .github/scripts/sync-v2-readings.py
+      - name: Save updated v2 archive
+        run: |
+          if git diff --quiet -- v2/index.html; then
+            echo 'No new reflections.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add v2/index.html
+          git commit -m 'Refresh AA25 daily reflections for website v2'
+          git push origin HEAD:main
