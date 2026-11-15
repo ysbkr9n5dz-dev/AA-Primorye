@@ -1,0 +1,5 @@
+Обложки: https://aa-ru.de/literature/
+bigbook: aa-book-02.jpg
+steps: aa-book-05.jpg
+living: aa-book-14.jpg
+PDF из AA25.ru могут относиться к другому изданию.

@@ -1,0 +1,27 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Читать PDF</title><style>
+*{box-sizing:border-box}body{margin:0;background:#e9e9e5;color:#263962;font:14px system-ui,sans-serif}.tools{position:sticky;top:0;z-index:2;display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;padding:10px;background:#fbfaf6;border-bottom:1px solid #cbd0d6}button,input{font:inherit;color:inherit;min-height:44px;border:1px solid #c5ccd5;border-radius:4px;background:#fff}button{min-width:44px;padding:8px 12px;cursor:pointer}button:disabled{opacity:.4;cursor:default}button:focus-visible,input:focus-visible{outline:3px solid #304474;outline-offset:2px}input{width:60px;text-align:center}output{min-width:50px;text-align:center;font-variant-numeric:tabular-nums}.group{display:flex;align-items:center;gap:6px}.stage{overflow:auto;height:calc(100svh - 76px);padding:20px;position:relative}.sheet{width:max-content;margin:0 auto;box-shadow:0 3px 15px #22304426;background:white}canvas{display:block}.status{padding:12px;text-align:center;margin:0;font-size:13px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:540px){.tools{gap:6px;padding:6px}.tools button{padding:6px 8px}.stage{height:calc(100svh - 114px);padding:12px}.group{gap:4px}}
+</style><div class="tools" role="toolbar" aria-label="Управление чтением"><div class="group"><button id="prev" aria-label="Предыдущая страница">←</button><label class="sr-only" for="page">Страница</label><input id="page" type="number" min="1" value="1"><span id="total">/ …</span><button id="next" aria-label="Следующая страница">→</button></div><div class="group"><button id="out" aria-label="Уменьшить масштаб">−</button><output id="zoom" aria-label="Масштаб">100%</output><button id="in" aria-label="Увеличить масштаб">+</button><button id="fit">По ширине</button></div></div><p class="status" id="status" role="status">Загрузка книги…</p><div class="stage" id="stage" tabindex="0" aria-label="Страница книги; при увеличении доступна прокрутка"><div class="sheet"><canvas id="canvas" role="img" aria-label="Страница PDF"></canvas></div><p id="text" class="sr-only"></p></div>
+<script type="module">
+import * as pdfjs from './pdfjs/pdf.mjs';
+pdfjs.GlobalWorkerOptions.workerSrc='./pdfjs/pdf.worker.mjs';
+const $=id=>document.getElementById(id),allowed=['bigbook.pdf','steps.pdf','living.pdf','digest.pdf'];
+let pdf,page=1,scale=1,fit=true,task=null,version=0;
+async function render(){
+ if(!pdf)return;const ticket=++version;
+ if(task){task.cancel();try{await task.promise}catch(e){}if(ticket!==version)return}
+ const p=await pdf.getPage(page);if(ticket!==version)return;
+ const base=p.getViewport({scale:1});if(fit)scale=Math.min(2,Math.max(.25,($('stage').clientWidth-40)/base.width));
+ const view=p.getViewport({scale}),dpr=Math.min(devicePixelRatio||1,2),c=$('canvas');
+ c.width=Math.ceil(view.width*dpr);c.height=Math.ceil(view.height*dpr);c.style.width=view.width+'px';c.style.height=view.height+'px';c.setAttribute('aria-label','Страница '+page+' из '+pdf.numPages);
+ $('page').value=page;$('total').textContent='/ '+pdf.numPages;$('zoom').value=Math.round(scale*100)+'%';$('prev').disabled=page===1;$('next').disabled=page===pdf.numPages;$('out').disabled=scale<=.25;$('in').disabled=scale>=3;
+ $('status').textContent='';$('status').hidden=true;
+ task=p.render({canvasContext:c.getContext('2d'),viewport:view,transform:dpr!==1?[dpr,0,0,dpr,0,0]:null});
+ try{await task.promise;const text=await p.getTextContent();if(ticket===version)$('text').textContent=text.items.map(i=>i.str).join(' ')}catch(e){if(e.name!=='RenderingCancelledException')fail(e)}
+}
+function fail(e){$('status').hidden=false;$('status').textContent='Не удалось показать PDF. Откройте файл отдельной вкладкой по ссылке под читалкой.';console.error(e)}
+function move(n){if(!pdf)return;page=Math.max(1,Math.min(pdf.numPages,n));$('stage').scrollTo(0,0);render()}
+$('prev').onclick=()=>move(page-1);$('next').onclick=()=>move(page+1);$('page').onchange=()=>move(Number($('page').value)||1);
+$('in').onclick=()=>{fit=false;scale=Math.min(3,Math.round((scale+.25)*100)/100);render()};$('out').onclick=()=>{fit=false;scale=Math.max(.25,Math.round((scale-.25)*100)/100);render()};$('fit').onclick=()=>{fit=true;render()};
+let resize;window.addEventListener('resize',()=>{clearTimeout(resize);if(fit)resize=setTimeout(render,150)});
+try{const name=new URLSearchParams(location.search).get('file');if(!allowed.includes(name))throw Error('Unknown PDF');pdf=await pdfjs.getDocument({url:name}).promise;$('page').max=pdf.numPages;await render()}catch(e){fail(e)}
+</script></html>
