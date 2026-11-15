@@ -1,5 +1,10 @@
 name: Update daily reflections for website v2
 on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/aa-v2-readings.yml
+      - .github/scripts/sync-v2-readings.py
   schedule:
     - cron: '15 14,16 * * *'
   workflow_dispatch:
