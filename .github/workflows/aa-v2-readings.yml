@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  pages: write
 concurrency:
   group: aa-v2-daily-reflections
   cancel-in-progress: false
@@ -19,6 +20,7 @@ jobs:
       - name: Refresh AA25 reflections
         run: python3 .github/scripts/sync-v2-readings.py
       - name: Save updated v2 archive
+        id: save
         run: |
           if git diff --quiet -- v2/index.html; then
             echo 'No new reflections.'
@@ -29,3 +31,9 @@ jobs:
           git add v2/index.html
           git commit -m 'Refresh AA25 daily reflections for website v2'
           git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Rebuild GitHub Pages after updating reflections
+        if: steps.save.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds > /dev/null
