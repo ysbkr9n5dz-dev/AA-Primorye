@@ -23,7 +23,7 @@ const GROUPS={
   resh:{name:"Решение",city:"Уссурийск",page:"https://aa25.ru/ussureshen/"},
   pier:{name:"Пристань 611",city:"Дальнегорск",page:"https://aa25.ru/pier611/"},
   kam:{name:"Камушек",city:"Большой Камень",map:"https://go.2gis.com/3r7s3"},
-  kras:{name:"Краски",city:"Краскино"},
+  kras:{name:"Краски",city:"Краскино",allOpen:true},
   veter:{name:"Ветер Перемен онлайн",city:"Онлайн"}
 };
 const A={
