@@ -226,7 +226,7 @@ function renderOnline(){
 /* ---------- СОБЫТИЯ ---------- */
 
 $("#events-list").innerHTML=EVENTS.map(e=>{const[d,mo,y]=e.d.split(".");const MN=["","янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
-  return `<li class="ev"><time datetime="${y}-${mo}-${d}">${+d} ${MN[+mo]}<small>${y} / публикация</small></time><div><a href="${e.u}" target="_blank" rel="noopener">${e.t}</a><p>${e.p}</p></div></li>`}).join("");
+  return `<li class="ev"><time datetime="${y}-${mo}-${d}">${+d} ${MN[+mo]}<small>${y} / публикация</small></time><div><a href="${e.u}"${/^https?:/.test(e.u)?' target="_blank" rel="noopener"':''}>${e.t}</a><p>${e.p}</p></div></li>`}).join("");
 
 /* ---------- КАРТОЧКА ГРУППЫ ---------- */
 const dlg=$("#dlg");
