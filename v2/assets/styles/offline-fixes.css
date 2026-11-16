@@ -81,13 +81,3 @@
 .hero-selftest a:hover{text-decoration-color:#1c3b7d}
 .hero-selftest a:focus-visible{outline:3px solid #9db7e8;outline-offset:2px;border-radius:3px}
 @media (max-width:640px){.hero-selftest{margin-top:10px;font-size:14.5px}}
-
-/* One entry per purpose: meetings and self-test on mobile, newcomer entry on desktop. */
-#home .hero-test-block{display:none}
-@media(max-width:820px){
- #home .hero-newcomer-desktop{display:none}
- #home .hero-links{align-items:flex-start}
- #home .hero-test-block{display:block;flex:1;min-width:0}
- #home .hero-test-mobile{width:100%;display:inline-flex;align-items:center;justify-content:center;min-height:46px}
- #home .hero-test-hint{display:block;margin:8px 0 0;max-width:none;font-size:12px;line-height:1.65;color:var(--foreground-muted,#536079)}
-}
