@@ -1,0 +1,56 @@
+/* «Что такое АА»: премиальная газета — плотная бумага, тиснёная шапка, глянцевый блик. */
+.about-section .aa-newspaper{
+  box-shadow:
+    0 1px 1px #3b2f1a0f,
+    0 3px 6px #3b2f1a0d,
+    0 14px 28px -6px #1c2f5a1f,
+    0 40px 70px -24px #1c2f5a2e;
+}
+/* Блик: следует за курсором на компьютере, один раз проходит по листу на телефоне */
+.aa-newspaper .paper-sheen{
+  position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;
+  background:radial-gradient(520px circle at var(--mx,72%) var(--my,8%),#ffffff8c,#ffffff26 38%,transparent 64%);
+  mix-blend-mode:soft-light;opacity:.9;transition:background-position .2s;
+}
+.aa-newspaper .paper-sheen:after{
+  content:'';position:absolute;top:-20%;bottom:-20%;left:-60%;width:38%;
+  background:linear-gradient(100deg,transparent,#ffffffb3 45%,#ffffffd9 50%,#ffffffb3 55%,transparent);
+  transform:skewX(-14deg) translateX(0);opacity:0;mix-blend-mode:soft-light;
+}
+.aa-newspaper.is-lit .paper-sheen:after{animation:aa-paper-sweep 1.6s cubic-bezier(.4,0,.2,1) .15s 1 both}
+@keyframes aa-paper-sweep{0%{opacity:0;transform:skewX(-14deg) translateX(0)}15%{opacity:1}85%{opacity:1}100%{opacity:0;transform:skewX(-14deg) translateX(480%)}}
+
+/* Шапка: краска с глубиной и тиснение */
+.aa-newspaper .newspaper-masthead h2{
+  background:linear-gradient(180deg,#2a50a3 0%,#1c3b7d 46%,#122a5e 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 1px 0 #ffffffd0) drop-shadow(0 -1px 0 #1c3b7d1f);
+}
+.aa-newspaper .about-lead:first-letter{
+  background:linear-gradient(180deg,#2a50a3,#122a5e);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+/* Печать-медальон вокруг логотипа */
+.aa-newspaper .newspaper-masthead img{
+  border-radius:50%;
+  box-shadow:0 0 0 3px #faf8f1,0 0 0 4px #1c3b7d,0 0 0 7px #faf8f1,0 0 0 7.6px #1c3b7d80,0 3px 8px 4px #1c2f5a24;
+}
+/* Орнамент в подзаголовке */
+.aa-newspaper .newspaper-deck{display:flex;align-items:center;justify-content:center;gap:14px}
+.aa-newspaper .newspaper-deck:before,.aa-newspaper .newspaper-deck:after{
+  content:'';width:5px;height:5px;background:#1c3b7d;transform:rotate(45deg);flex:none;
+}
+/* Заголовки колонок — тонкая синяя линейка над ними */
+.aa-newspaper .about-grid h3,.aa-newspaper .about-more h3{color:#1c3b7d}
+.aa-newspaper .about-grid h3:before,.aa-newspaper .about-more h3:before{
+  content:'';display:block;width:28px;height:2px;background:#1c3b7d;margin-bottom:12px;
+}
+@media (max-width:640px){
+  .aa-newspaper .paper-sheen{background:radial-gradient(360px circle at 80% 4%,#ffffff8c,#ffffff1f 40%,transparent 66%)}
+  .aa-newspaper .newspaper-masthead img{box-shadow:0 0 0 2px #faf8f1,0 0 0 3px #1c3b7d,0 0 0 5px #faf8f1,0 0 0 5.6px #1c3b7d80,0 2px 6px 3px #1c2f5a24}
+}
+@media (prefers-reduced-motion:reduce){.aa-newspaper.is-lit .paper-sheen:after{animation:none}}
+@media (forced-colors:active){.aa-newspaper .newspaper-masthead h2,.aa-newspaper .about-lead:first-letter{color:CanvasText;background:none}.aa-newspaper .paper-sheen{display:none}}
+
+/* Нижнее меню: «Впервые здесь» в две строки — значки держим на одной линии */
+.mobile-nav a,.mobile-nav .nav-more{justify-content:flex-start;padding-top:8px;line-height:1.15;text-align:center}
