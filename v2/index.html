@@ -15,11 +15,15 @@
 <link rel="stylesheet" href="assets/styles/style-4.css">
 <link rel="stylesheet" href="assets/styles/header-polish.css">
 <link rel="stylesheet" href="assets/styles/library-styles.css">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+<meta name="theme-color" content="#1c3b7d">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Перейти к содержимому</a>
 
-<div class="proto">Дизайн-прототип для обсуждения. Время и типы собраний сверены с AA25.ru 15 ноября 2026 года.</div>
+<div class="proto">Дизайн-прототип для обсуждения. Время и типы собраний сверены с AA25.ru <span data-verified>15 ноября 2026 года</span>.</div>
 
 <header class="top">
   <div class="wrap">
@@ -35,7 +39,7 @@
     </nav>
     <div class="header-contact" aria-label="Телефоны содружества">
       <a class="header-phone" href="tel:+74232967957" aria-label="Позвонить на телефон доверия во Владивостоке: +7 (423) 296-79-57"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 3 3 5-2 2a14 14 0 0 0 6 6l2-2 5 3c0 3-2 5-5 4C9 19 5 15 3 8 2 5 4 3 7 3Z"/></svg><span>+7 (423) 296-79-57</span></a>
-      <div class="header-contact-meta"><span>Владивосток</span><span aria-hidden="true">·</span><a href="#phones">Другие города <span aria-hidden="true">→</span></a></div>
+      <div class="header-contact-meta"><span>Владивосток</span><span aria-hidden="true">·</span><a href="#phones">Все контакты <span aria-hidden="true">→</span></a></div>
     </div>
   </div>
 </header>
@@ -55,6 +59,7 @@
         <a class="btn primary" href="#schedule">Всё расписание</a>
         <a class="btn ghost" href="#newcomer">Как проходит собрание</a>
       </div>
+      <p class="hero-selftest">Не уверены, подходит ли вам АА? <a href="https://aa25.ru/info/" data-selftest target="_blank" rel="noopener">Пройдите тест из 12 вопросов <span aria-hidden="true">→</span></a></p>
     </div>
     <aside class="next" aria-label="Ближайшие собрания">
       <h2 id="next-title">Ближайшие собрания</h2>
@@ -65,7 +70,7 @@
 </div>
 
 <section id="daily" class="daily-section"><div class="wrap"><span class="eyebrow">НА КАЖДЫЙ ДЕНЬ</span><h2>Ежедневные размышления</h2><div class="reading-controls"><button id="reading-prev" aria-label="Предыдущий день">←</button><label>Дата <input type="date" id="reading-date"></label><button id="reading-next" aria-label="Следующий день">→</button><button id="reading-today">Сегодня</button></div><p id="reading-status" role="status"></p><div class="reading-spread"><aside class="reading-front" aria-label="Дата размышления"><div class="reading-imprint">Анонимные Алкоголики<br>Приморский край</div><div class="reading-date-display"><span id="reading-day-number">—</span><span id="reading-month-name"></span><span id="reading-year-number"></span></div><div class="reading-quote"></div><svg class="reading-sea-mark" viewBox="0 0 240 100" fill="none" aria-hidden="true"><path d="M15 54h210M80 54a40 40 0 0 1 80 0M20 70c30-12 45 12 75 0s45 12 75 0 40 7 50 0M45 85c20-8 35 8 55 0s35 8 55 0 30 4 40 0" stroke="currentColor" stroke-width="1"/></svg><span class="reading-edition">Ежедневные размышления</span></aside><article id="reading-body" class="reading-paper" aria-label="Текст ежедневного размышления"></article></div><p class="data-note">Источник: <a id="reading-source" href="https://aa25.ru/" target="_blank" rel="noopener">AA25.ru</a></p></div></section>
-<section id="home-events" class="home-events"><div class="wrap"><span class="eyebrow">ЖИЗНЬ СОДРУЖЕСТВА</span><div class="sec-head"><div><h2>События содружества</h2><p>Семинары, форумы и встречи содружества.</p></div><a class="btn line" href="#calendar">Все события</a></div><p class="data-note">Сверено с AA25.ru 15 ноября 2026 года. Источник — <a href="https://aa25.ru/news/" target="_blank" rel="noopener">новости AA25.ru</a>. В календаре указаны даты мероприятий, а не даты публикаций.</p><div id="home-event-list"></div></div></section>
+<section id="home-events" class="home-events"><div class="wrap"><span class="eyebrow">ЖИЗНЬ СОДРУЖЕСТВА</span><div class="sec-head"><div><h2>События содружества</h2><p>Семинары, форумы и встречи содружества.</p></div><a class="btn line" href="#calendar">Все события</a></div><p class="data-note">Сверено с AA25.ru <span data-verified>15 ноября 2026 года</span>. Источник — <a href="https://aa25.ru/news/" target="_blank" rel="noopener">новости AA25.ru</a>. В календаре указаны даты мероприятий, а не даты публикаций.</p><div id="home-event-list"></div></div></section>
 <section id="schedule" class="schedule-page"><div class="wrap"><div class="sec-head"><div><h2>Расписание собраний</h2><p>Время владивостокское. Собрания длятся один час.</p></div></div><div class="schedule-toolbar"><div class="frow" id="f-city"><label for="schedule-city">Город</label><select id="schedule-city"><option>Все</option><option>Владивосток</option><option>Артём</option><option>Находка</option><option>Уссурийск</option><option>Дальнегорск</option><option>Большой Камень</option></select></div><div class="frow" id="f-type"><span>Формат</span></div><button class="reset-filters" id="reset-filters" type="button">Сбросить</button></div><div class="schedule-datebar"><div id="f-day" class="schedule-week" role="group" aria-label="Дни недели"></div><div class="schedule-view"><button type="button" id="schedule-today">Сегодня</button><div class="schedule-mode" role="group" aria-label="Вид расписания"><button type="button" id="schedule-day-mode">День</button><button type="button" id="schedule-week-mode">Вся неделя</button></div></div></div><p class="count" id="count" role="status"></p><div id="days"></div><div class="schedule-explainer"><p><b>Открытые</b> — для всех. <b>Закрытые</b> — для тех, у кого есть проблема с алкоголем и желание бросить пить.</p><a href="#newcomer">Как проходит первое собрание</a></div></div></section>
 
 <section id="online" class="online-sec">
@@ -102,8 +107,14 @@
         <li><div><b>Просто придите</b><span>За 10 минут до начала. Скажите, что вы в первый раз, вас встретят.</span></div></li>
         <li><div><b>Послушайте</b><span>Говорить не обязательно. Собрание длится около часа.</span></div></li>
       </ol></div>
+        <div class="selftest-card">
+          <span class="selftest-kicker">Тест · 12 вопросов · 3–5 минут</span>
+          <h3>Подходит ли мне АА?</h3>
+          <p>Не уверены, есть ли у вас проблема с алкоголем? Ответьте себе честно на 12 простых вопросов о том, как выпивка влияет на вашу жизнь. В конце увидите, что об этом говорят члены содружества.</p>
+          <p class="selftest-privacy">Это не диагноз. Ответы никуда не отправляются и не сохраняются.</p>
+          <a class="btn selftest-start" id="open-selftest" href="https://aa25.ru/info/" target="_blank" rel="noopener">Пройти тест</a>
+        </div>
         <div class="hero-links" >
-        <a class="btn line" href="https://aa25.ru/info/" target="_blank" rel="noopener">Тест из 12 вопросов</a>
         <a class="btn line" href="https://aa25.ru/books/" target="_blank" rel="noopener">Литература</a>
       </div>
       </div>
@@ -141,7 +152,7 @@
   <article class="library-book"><div class="book-shelf"><div class="book-volume"><img src="library-files/living-cover.jpg" alt="Обложка книги «Жить трезвыми»" width="400" height="550"></div></div><h3>Жить трезвыми</h3><p>Практический опыт: как справляться с повседневными ситуациями без алкоголя.</p><span class="library-file">PDF · 904 КБ</span><div class="library-actions"><a class="btn primary" href="#reader" data-read="living">Читать</a><a class="btn line" href="library-files/living.pdf" download>Скачать PDF</a></div></article>
  </div>
  <div class="library-journals" id="journals"><h3>Журнал и дайджест</h3><div class="journal-grid book-grid">
-  <article class="library-book journal-card"><div class="book-shelf"><div class="book-volume"><img src="library-files/digest.png" alt="Обложка дайджеста журнала АА России" width="400" height="550"></div></div><h4>Дайджест журнала АА России</h4><p>Подборка материалов журнала в одном выпуске.<br>№1 · 2024 год · 16 страниц</p><span class="library-file">PDF · 24,4 МБ</span><div class="library-actions"><a class="btn primary" href="#reader" data-read="digest">Читать</a><a class="btn line" href="library-files/digest.pdf" download>Скачать PDF</a></div></article>
+  <article class="library-book journal-card"><div class="book-shelf"><div class="book-volume"><img src="library-files/digest.png" alt="Обложка дайджеста журнала АА России" width="400" height="550"></div></div><h4>Дайджест журнала АА России</h4><p>Подборка материалов журнала в одном выпуске.<br>№1 · 2024 год · 16 страниц</p><span class="library-file">PDF · 3,4 МБ</span><div class="library-actions"><a class="btn primary" href="#reader" data-read="digest">Читать</a><a class="btn line" href="library-files/digest.pdf" download>Скачать PDF</a></div></article>
   <article class="library-book journal-card journal-channel"><div class="book-shelf"><div class="book-volume journal-placeholder" role="img" aria-label="Журнал АА России в Telegram — условная обложка раздела"><span class="journal-cover-top">СОДРУЖЕСТВО · ОПЫТ · НАДЕЖДА</span><strong>Журнал<br>АА России</strong><span class="journal-cover-rule"></span><span class="journal-cover-caption">Материалы журнала<br>в Telegram</span><span class="journal-cover-bottom">АНОНИМНЫЕ АЛКОГОЛИКИ</span></div></div><h4>Журнал АА России</h4><p>Публикации и материалы журнала в Telegram. Внешний источник, указанный на AA25.ru.</p><span class="library-file">Канал журнала · Telegram</span><div class="library-actions"><a class="btn line" href="https://t.me/+ZmYb3eb3ohRmZTQ6" target="_blank" rel="noopener">Открыть журнал ↗</a></div></article>
  </div></div>
  <p class="library-attribution">Источник файлов: <a href="https://aa25.ru/books/" target="_blank" rel="noopener">AA25.ru — литература</a>. Обложки книг: <a href="https://aa-ru.de/literature/" target="_blank" rel="noopener">русскоязычное сообщество АА</a>. PDF могут относиться к другому изданию. Для Telegram использована условная обложка раздела.</p>
@@ -154,11 +165,12 @@
     <div class="contact-intro">
       <div>
         <span class="eyebrow">СВЯЗЬ С СОДРУЖЕСТВОМ</span>
-        <h2>Телефоны доверия</h2>
-        <p>На звонок ответит член содружества.</p>
+        <h2>Контакты</h2>
+        <p>Телефоны доверия по городам, почта и сайты содружества. На звонок ответит член содружества.</p>
       </div>
       <div class="landline-visual" aria-hidden="true"><img src="assets/images/image-cba497bb4559.svg" alt="" width="480" height="360"></div>
     </div>
+    <h3 class="contact-sub">Телефоны доверия по городам</h3>
     <div class="pgrid">
       <div class="pcard"><span>Владивосток</span><a href="tel:+74232967957">+7 (423) 296-79-57</a><em>стационарный телефон</em></div>
       <div class="pcard"><span>Владивосток, WhatsApp</span><a href="https://wa.me/79084467957">+7 908 446-79-57</a></div>
@@ -167,6 +179,27 @@
       <div class="pcard"><span>Уссурийск</span><a href="tel:+79841516869">+7 984 151-68-69</a></div>
       <div class="pcard"><span>Дальнегорск</span><a href="tel:+79240093239">+7 924 009-32-39</a></div>
     </div>
+
+    <h3 class="contact-sub">Почта</h3>
+    <div class="pgrid mail">
+      <div class="pcard"><span>Почта содружества</span><a href="mailto:aavladivostock@yandex.ru">aavladivostock@yandex.ru</a></div>
+      <div class="pcard"><span>Сайт aa25.ru</span><a href="mailto:admin@aa25.ru">admin@aa25.ru</a></div>
+      <div class="pcard"><span>Служба переписки АА России</span><a href="mailto:perepiska@rsoaa.ru">perepiska@rsoaa.ru</a><em>Почтовый адрес: 101000 Москва, а/я 710, Фонд «Единство»</em></div>
+    </div>
+    <h3 class="contact-sub">Полезные ссылки</h3>
+    <ul class="ulinks">
+        <li><a href="https://aa25.ru/" target="_blank" rel="noopener">aa25.ru</a><span>Официальный сайт содружества Приморского края. Данные на этой странице взяты с него</span></li>
+        <li><a href="https://aaprim.ru/cont/" target="_blank" rel="noopener">aaprim.ru</a><span>Зеркало сайта aa25.ru</span></li>
+        <li><a href="https://disk.yandex.ru/d/HgCL3tzC4qXAdA" target="_blank" rel="noopener">Материалы для информирования общественности</a><span>Утверждены на комитете по обслуживанию АА г. Владивостока и готовы к тиражированию</span></li>
+        <li><a href="https://khv.aarussia.ru/" target="_blank" rel="noopener">khv.aarussia.ru</a><span>Анонимные Алкоголики Хабаровска</span></li>
+        <li><a href="https://aarus.ru/" target="_blank" rel="noopener">aarus.ru</a><span>Фонд обслуживания Анонимных Алкоголиков (ФОАА)</span></li>
+        <li><a href="https://aarussia.ru/" target="_blank" rel="noopener">aarussia.ru</a><span>Фонд поддержки движения Анонимных Алкоголиков «Единство»</span></li>
+        <li><a href="https://www.aa.org/" target="_blank" rel="noopener">aa.org</a><span>Анонимные Алкоголики США</span></li>
+        <li><a href="https://al-anon.org.ru/" target="_blank" rel="noopener">al-anon.org.ru</a><span>Ал-Анон и Алатин России: содружество родственников и друзей алкоголиков</span></li>
+        <li><a href="https://aa25.ru/al-anon/" target="_blank" rel="noopener">Группы Ал-Анон во Владивостоке</a><span>Расписание на сайте aa25.ru</span></li>
+        <li><a href="http://radioaa.ru/" target="_blank" rel="noopener">radioaa.ru</a><span>Круглосуточное интернет-вещание в поддержку людей, желающих освободиться от алкогольной зависимости</span></li>
+        <li><a href="https://aa24.online/" target="_blank" rel="noopener">aa24.online</a><span>Круглосуточные онлайн-собрания АА каждый чётный час по Москве</span></li>
+    </ul>
   </div>
 </section>
 
@@ -221,7 +254,7 @@
 
 <footer>
   <div class="wrap">
-    <div>Прототип. Данные групп и телефоны взяты с открытых страниц <a href="https://aa25.ru/" target="_blank" rel="noopener">aa25.ru</a> 13 ноября 2026 года и перед запуском требуют проверки каждой группой.</div>
+    <div>Прототип. Данные групп и телефоны сверены с открытыми страницами <a href="https://aa25.ru/" target="_blank" rel="noopener">aa25.ru</a> <span data-verified>15 ноября 2026 года</span> и перед запуском требуют проверки каждой группой.</div>
     <div>Почта содружества: aavladivostock@yandex.ru. Служба переписки АА России: perepiska@rsoaa.ru.</div>
   </div>
 </footer>
@@ -249,5 +282,7 @@
 <script src="assets/scripts/library-js.js"></script>
 <link rel="stylesheet" href="assets/styles/reader-mobile.css">
 <script src="assets/scripts/reader-mobile.js"></script>
+<link rel="stylesheet" href="assets/styles/offline-fixes.css">
+<script src="assets/scripts/offline-fixes.js"></script>
 </body>
 </html>
