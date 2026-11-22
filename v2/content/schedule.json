@@ -1,0 +1,620 @@
+{
+ "verified": "15 ноября 2026 года",
+ "cities": [
+  {
+   "name": "Владивосток",
+   "in": "Владивостоке"
+  },
+  {
+   "name": "Артём",
+   "in": "Артёме"
+  },
+  {
+   "name": "Находка",
+   "in": "Находке"
+  },
+  {
+   "name": "Уссурийск",
+   "in": "Уссурийске"
+  },
+  {
+   "name": "Дальнегорск",
+   "in": "Дальнегорске"
+  },
+  {
+   "name": "Большой Камень",
+   "in": "Большом Камне"
+  },
+  {
+   "name": "Краскино",
+   "in": "Краскино"
+  }
+ ],
+ "groups": [
+  {
+   "id": "preo",
+   "name": "Преображение",
+   "city": "Владивосток",
+   "page": "https://aa25.ru/transformation/",
+   "map": "",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "path",
+   "name": "Твой путь",
+   "city": "Владивосток",
+   "page": "https://aa25.ru/yourway/",
+   "map": "",
+   "allOpen": true,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "nash",
+   "name": "Наш район",
+   "city": "Владивосток",
+   "page": "https://aa25.ru/ourdistrict/",
+   "map": "",
+   "allOpen": true,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "vost",
+   "name": "Восток",
+   "city": "Владивосток",
+   "page": "",
+   "map": "https://go.2gis.com/xfk7pt",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "prim",
+   "name": "Приморочка",
+   "city": "Владивосток",
+   "page": "https://aa25.ru/prim/",
+   "map": "",
+   "allOpen": false,
+   "tags": [
+    "женская"
+   ],
+   "onlineNote": "временно только онлайн",
+   "hidden": false
+  },
+  {
+   "id": "fun",
+   "name": "Весёлые ребята",
+   "city": "Владивосток",
+   "page": "https://aa25.ru/funnyguys/",
+   "map": "",
+   "allOpen": true,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "vtor",
+   "name": "Вторяк",
+   "city": "Владивосток",
+   "page": "https://aa25.ru/secondary/",
+   "map": "",
+   "allOpen": true,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "welc",
+   "name": "Добро пожаловать",
+   "city": "Владивосток",
+   "page": "",
+   "map": "https://go.2gis.com/o1hpv",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "bereg",
+   "name": "Берег Надежды",
+   "city": "Владивосток",
+   "page": "",
+   "map": "https://go.2gis.com/o1hpv",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "joy",
+   "name": "Радуйся",
+   "city": "Владивосток",
+   "page": "https://aa25.ru/joy",
+   "map": "",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "mayak",
+   "name": "Маяк",
+   "city": "Владивосток",
+   "page": "",
+   "map": "https://go.2gis.com/hayaa",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "par",
+   "name": "Параллель",
+   "city": "Артём",
+   "page": "",
+   "map": "https://go.2gis.com/hct91m",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "nad",
+   "name": "Надежда",
+   "city": "Артём",
+   "page": "",
+   "map": "https://go.2gis.com/hct91m",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "np",
+   "name": "Новый путь",
+   "city": "Находка",
+   "page": "",
+   "map": "https://2gis.ru/nahodka/geo/11541109700305040?m=132.86944%2C42.80914%2F17.77",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "briz",
+   "name": "Бриз",
+   "city": "Находка",
+   "page": "https://aa25.ru/briz/",
+   "map": "",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "resh",
+   "name": "Решение",
+   "city": "Уссурийск",
+   "page": "https://aa25.ru/ussureshen/",
+   "map": "",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "pier",
+   "name": "Пристань 611",
+   "city": "Дальнегорск",
+   "page": "https://aa25.ru/pier611/",
+   "map": "",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "kam",
+   "name": "Камушек",
+   "city": "Большой Камень",
+   "page": "",
+   "map": "https://go.2gis.com/3r7s3",
+   "allOpen": false,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  },
+  {
+   "id": "kras",
+   "name": "Краски",
+   "city": "Краскино",
+   "page": "",
+   "map": "",
+   "allOpen": true,
+   "tags": [],
+   "onlineNote": "",
+   "hidden": false
+  }
+ ],
+ "addresses": [
+  {
+   "id": "volod",
+   "address": "ул. Володарского, 22 стр. 2, каб. 107",
+   "entrance": "Вход со двора, в белую дверь и налево"
+  },
+  {
+   "id": "narod",
+   "address": "Народный проспект, 2В, 1 этаж",
+   "entrance": "Вход со двора"
+  },
+  {
+   "id": "tuh",
+   "address": "ул. Тухачевского, 48",
+   "entrance": "Отдельный вход с вывеской «Наш район»"
+  },
+  {
+   "id": "prih",
+   "address": "ул. Приходько, 2",
+   "entrance": "Вход в цокольное помещение со стороны проезжей части, железная дверь"
+  },
+  {
+   "id": "rus",
+   "address": "ул. Русская, 73",
+   "entrance": "Вход со двора, ориентир OZON, первая дверь налево"
+  },
+  {
+   "id": "gog5",
+   "address": "ул. Гоголя, 35, КНД, 1 этаж, каб. 5",
+   "entrance": ""
+  },
+  {
+   "id": "gogz",
+   "address": "ул. Гоголя, 35, КНД, 1 этаж, актовый зал",
+   "entrance": ""
+  },
+  {
+   "id": "chern",
+   "address": "ул. Черняховского, 13 ст8, Радонежский храм",
+   "entrance": ""
+  },
+  {
+   "id": "kal",
+   "address": "ул. Калинина, 243Г, 1 этаж",
+   "entrance": "Кабинет «Континент ДВ Импорт»"
+  },
+  {
+   "id": "has4",
+   "address": "ул. Хасанская, 1, филиал КНД, 1 этаж, каб. 4",
+   "entrance": ""
+  },
+  {
+   "id": "has",
+   "address": "ул. Хасанская, 1, филиал КНД",
+   "entrance": ""
+  },
+  {
+   "id": "lun",
+   "address": "ул. Луначарского, 8",
+   "entrance": "Первый подъезд"
+  },
+  {
+   "id": "sen",
+   "address": "ул. Сенявина, 14, городская библиотека-музей",
+   "entrance": ""
+  },
+  {
+   "id": "len",
+   "address": "ул. Ленина, 52А, реабилитационный центр «Практики»",
+   "entrance": ""
+  },
+  {
+   "id": "geo",
+   "address": "ул. Геологическая, 1",
+   "entrance": "Вход с торца здания на цокольный этаж"
+  },
+  {
+   "id": "men",
+   "address": "ул. Менделеева, 1А, отделение наркологии",
+   "entrance": ""
+  },
+  {
+   "id": "km",
+   "address": "ул. Карла Маркса, 49, городской Дом культуры, каб. 15",
+   "entrance": ""
+  },
+  {
+   "id": "krasdk",
+   "address": "ул. Ленина, 22, Дом культуры, 1 этаж",
+   "entrance": ""
+  }
+ ],
+ "meetings": [
+  {
+   "group": "preo",
+   "day": 1,
+   "time": "11:00",
+   "address": "volod",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": "Закрытое собрание"
+  },
+  {
+   "group": "path",
+   "day": 1,
+   "time": "19:00",
+   "address": "narod",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "nash",
+   "day": 1,
+   "time": "19:00",
+   "address": "tuh",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "vost",
+   "day": 2,
+   "time": "17:00",
+   "address": "prih",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": "1-й и 3-й вторник месяца открытое, 2-й и 4-й закрытое"
+  },
+  {
+   "group": "prim",
+   "day": 2,
+   "time": "18:30",
+   "address": "",
+   "format": "online",
+   "link": "https://telemost.yandex.ru/j/20585078874138",
+   "platform": "Яндекс Телемост",
+   "note": "Временно только онлайн. Последний вторник месяца — открытое собрание"
+  },
+  {
+   "group": "fun",
+   "day": 2,
+   "time": "19:00",
+   "address": "narod",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "vtor",
+   "day": 2,
+   "time": "19:00",
+   "address": "rus",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "welc",
+   "day": 3,
+   "time": "18:00",
+   "address": "gog5",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": "Последняя среда месяца закрытое"
+  },
+  {
+   "group": "nash",
+   "day": 3,
+   "time": "19:00",
+   "address": "tuh",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "path",
+   "day": 4,
+   "time": "19:00",
+   "address": "narod",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "vtor",
+   "day": 4,
+   "time": "19:00",
+   "address": "rus",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "bereg",
+   "day": 5,
+   "time": "18:30",
+   "address": "gogz",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": "4-я пятница месяца открытое"
+  },
+  {
+   "group": "preo",
+   "day": 6,
+   "time": "10:00",
+   "address": "volod",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": "Последняя суббота месяца открытое, остальные закрытые"
+  },
+  {
+   "group": "vtor",
+   "day": 6,
+   "time": "19:00",
+   "address": "rus",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "joy",
+   "day": 7,
+   "time": "14:00",
+   "address": "chern",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "mayak",
+   "day": 7,
+   "time": "15:00",
+   "address": "kal",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": "Последнее воскресенье месяца закрытое"
+  },
+  {
+   "group": "nash",
+   "day": 7,
+   "time": "18:00",
+   "address": "tuh",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "par",
+   "day": 2,
+   "time": "19:00",
+   "address": "has4",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "nad",
+   "day": 5,
+   "time": "19:00",
+   "address": "has",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "np",
+   "day": 3,
+   "time": "19:00",
+   "address": "lun",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "briz",
+   "day": 6,
+   "time": "17:00",
+   "address": "sen",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "resh",
+   "day": 5,
+   "time": "19:00",
+   "address": "len",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "pier",
+   "day": 1,
+   "time": "18:00",
+   "address": "geo",
+   "format": "hybrid",
+   "link": "https://max.ru/joincall/4JthfkpPpoZc5izH_qVFLOCNKOI-AlXb6cvi-c2mtYE",
+   "platform": "MAX",
+   "note": ""
+  },
+  {
+   "group": "pier",
+   "day": 3,
+   "time": "18:00",
+   "address": "men",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "pier",
+   "day": 5,
+   "time": "18:00",
+   "address": "geo",
+   "format": "hybrid",
+   "link": "https://max.ru/joincall/4JthfkpPpoZc5izH_qVFLOCNKOI-AlXb6cvi-c2mtYE",
+   "platform": "MAX",
+   "note": ""
+  },
+  {
+   "group": "kam",
+   "day": 1,
+   "time": "19:00",
+   "address": "km",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "kras",
+   "day": 2,
+   "time": "18:00",
+   "address": "krasdk",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  },
+  {
+   "group": "kras",
+   "day": 4,
+   "time": "18:00",
+   "address": "krasdk",
+   "format": "in",
+   "link": "",
+   "platform": "",
+   "note": ""
+  }
+ ]
+}

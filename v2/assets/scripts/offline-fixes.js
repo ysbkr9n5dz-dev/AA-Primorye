@@ -3,7 +3,7 @@
 'use strict';
 
 /* Одна дата сверки для всего сайта: меняется только здесь */
-const VERIFIED='15 ноября 2026 года';
+const VERIFIED=(((window.AA_CONTENT||{}).schedule||{}).verified)||'15 ноября 2026 года';
 document.querySelectorAll('[data-verified]').forEach(el=>{el.textContent=VERIFIED});
 
 /* ---------- Тест «Подходит ли вам АА?» ----------
@@ -51,6 +51,8 @@ function parse(html){
 }
 async function load(){
   if(data)return data;
+  const local=(window.AA_CONTENT||{}).selftest;
+  if(local&&local.questions&&local.questions.length){data=local;return data}
   try{const c=sessionStorage.getItem('aa-selftest-v2');if(c){data=JSON.parse(c);return data}}catch(e){}
   const ctl=window.AbortController?new AbortController():null;const t=ctl&&setTimeout(()=>ctl.abort(),12000);
   try{

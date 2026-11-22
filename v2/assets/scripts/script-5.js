@@ -4,7 +4,7 @@
  let lastToday=today(),request=0;input.value=lastToday;input.max=lastToday;
  const cache=new Map();
  let archive={};
- try{archive=JSON.parse(document.getElementById('reading-archive')?.textContent||'{}')}catch(e){}
+ archive=((window.AA_CONTENT||{}).readings)||{};
  const quotePage=document.querySelector('.reading-quote'),wide=matchMedia('(min-width:821px)');
  function arrangePages(){
    const quote=quotePage.querySelector('blockquote');
@@ -25,15 +25,7 @@
    const controller=new AbortController();fetchController=controller;
    try{
      let post=cache.get(value)||archive[value.slice(5)];
-     if(!post){
-       const timer=setTimeout(()=>controller.abort(),12000);
-       try{
-         const response=await fetch(`https://aa25.ru/wp-json/wp/v2/posts?slug=${encodeURIComponent(`${d}-${months[m-1]}`)}&per_page=20&_fields=title,content,link,date`,{signal:controller.signal});
-         if(!response.ok)throw Error();
-         const data=await response.json();post=data.find(p=>p.title?.rendered?.toLowerCase().includes(`${d} ${months[m-1]}`));
-         if(!post)throw Error();cache.set(value,post);
-       }finally{clearTimeout(timer)}
-     }
+     if(!post)throw Error('no-reading');
      if(id!==request)return;
      const fragment=safeContent(post.content.rendered);
      const commit=()=>{

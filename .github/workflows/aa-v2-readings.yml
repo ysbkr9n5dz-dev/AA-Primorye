@@ -5,6 +5,7 @@ on:
     paths:
       - .github/workflows/aa-v2-readings.yml
       - .github/scripts/sync-v2-readings.py
+      - tools/build_content.py
   schedule:
     - cron: '15 14,16 * * *'
   workflow_dispatch:
@@ -27,13 +28,13 @@ jobs:
       - name: Save updated v2 archive
         id: save
         run: |
-          if git diff --quiet -- v2/index.html; then
+          if git diff --quiet -- v2/content; then
             echo 'No new reflections.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add v2/index.html
+          git add v2/content/readings.json v2/content/content.js
           git commit -m 'Refresh AA25 daily reflections for website v2'
           git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"

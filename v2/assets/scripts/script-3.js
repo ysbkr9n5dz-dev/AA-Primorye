@@ -1,86 +1,17 @@
-/* ---------- ДАННЫЕ (перенесены 13.11.2026; время и типы сверены с aa25.ru 15.11.2026) ---------- */
-const CITIES=["Владивосток","Артём","Находка","Уссурийск","Дальнегорск","Большой Камень","Краскино"];
+/* ---------- ДАННЫЕ: берутся из content/schedule.json и content/online.json (через content/content.js) ---------- */
+const CONTENT=window.AA_CONTENT||{};
+const SCHED=CONTENT.schedule||{cities:[],groups:[],addresses:[],meetings:[]};
+const ONLINE=(CONTENT.online||[]).filter(o=>!o.hidden);
+const CITIES=SCHED.cities.map(c=>c.name);
 const DAYS=["","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
 const DSHORT=["","Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
-const GEN=["","Владивостоке","Артёме","Находке","Уссурийске","Дальнегорске","Большом Камне","Краскино"];
-
-const GROUPS={
-  preo:{name:"Преображение",city:"Владивосток",page:"https://aa25.ru/transformation/"},
-  path:{name:"Твой путь",city:"Владивосток",page:"https://aa25.ru/yourway/",allOpen:true},
-  nash:{name:"Наш район",city:"Владивосток",page:"https://aa25.ru/ourdistrict/",allOpen:true},
-  vost:{name:"Восток",city:"Владивосток",map:"https://go.2gis.com/xfk7pt"},
-  prim:{name:"Приморочка",city:"Владивосток",page:"https://aa25.ru/prim/",tags:["женская"]},
-  fun:{name:"Весёлые ребята",city:"Владивосток",page:"https://aa25.ru/funnyguys/",allOpen:true},
-  vtor:{name:"Вторяк",city:"Владивосток",page:"https://aa25.ru/secondary/",allOpen:true},
-  welc:{name:"Добро пожаловать",city:"Владивосток",map:"https://go.2gis.com/o1hpv"},
-  bereg:{name:"Берег Надежды",city:"Владивосток",map:"https://go.2gis.com/o1hpv"},
-  joy:{name:"Радуйся",city:"Владивосток",page:"https://aa25.ru/joy"},
-  mayak:{name:"Маяк",city:"Владивосток",map:"https://go.2gis.com/hayaa"},
-  par:{name:"Параллель",city:"Артём",map:"https://go.2gis.com/hct91m"},
-  nad:{name:"Надежда",city:"Артём",map:"https://go.2gis.com/hct91m"},
-  np:{name:"Новый путь",city:"Находка",map:"https://2gis.ru/nahodka/geo/11541109700305040?m=132.86944%2C42.80914%2F17.77"},
-  briz:{name:"Бриз",city:"Находка",page:"https://aa25.ru/briz/"},
-  resh:{name:"Решение",city:"Уссурийск",page:"https://aa25.ru/ussureshen/"},
-  pier:{name:"Пристань 611",city:"Дальнегорск",page:"https://aa25.ru/pier611/"},
-  kam:{name:"Камушек",city:"Большой Камень",map:"https://go.2gis.com/3r7s3"},
-  kras:{name:"Краски",city:"Краскино",allOpen:true},
-  veter:{name:"Ветер Перемен онлайн",city:"Онлайн"}
-};
-const A={
-  volod:["ул. Володарского, 22 стр. 2, каб. 107","Вход со двора, в белую дверь и налево"],
-  narod:["Народный проспект, 2В, 1 этаж","Вход со двора"],
-  tuh:["ул. Тухачевского, 48","Отдельный вход с вывеской «Наш район»"],
-  prih:["ул. Приходько, 2","Вход в цокольное помещение со стороны проезжей части, железная дверь"],
-  rus:["ул. Русская, 73","Вход со двора, ориентир OZON, первая дверь налево"],
-  gog5:["ул. Гоголя, 35, КНД, 1 этаж, каб. 5",""],
-  gogz:["ул. Гоголя, 35, КНД, 1 этаж, актовый зал",""],
-  chern:["ул. Черняховского, 13 ст8, Радонежский храм",""],
-  kal:["ул. Калинина, 243Г, 1 этаж","Кабинет «Континент ДВ Импорт»"],
-  has4:["ул. Хасанская, 1, филиал КНД, 1 этаж, каб. 4",""],
-  has:["ул. Хасанская, 1, филиал КНД",""],
-  lun:["ул. Луначарского, 8","Первый подъезд"],
-  sen:["ул. Сенявина, 14, городская библиотека-музей",""],
-  len:["ул. Ленина, 52А, реабилитационный центр «Практики»",""],
-  geo:["ул. Геологическая, 1","Вход с торца здания на цокольный этаж"],
-  men:["ул. Менделеева, 1А, отделение наркологии",""],
-  km:["ул. Карла Маркса, 49, городской Дом культуры, каб. 15",""],
-  krasdk:["ул. Ленина, 22, Дом культуры, 1 этаж",""]
-};
-const MAX="https://max.ru/joincall/4JthfkpPpoZc5izH_qVFLOCNKOI-AlXb6cvi-c2mtYE";
-const VETER="https://us02web.zoom.us/j/4513655750?pwd=eE0wcERuQjhhalFTTmJMWFdJUFR2dz09";
+const GEN=["",...SCHED.cities.map(c=>c.in||c.name)];
+const GROUPS={};
+SCHED.groups.filter(g=>!g.hidden).forEach(g=>{GROUPS[g.id]={name:g.name,city:g.city,page:g.page||undefined,map:g.map||undefined,allOpen:!!g.allOpen,tags:g.tags||[],onlineNote:g.onlineNote||""}});
+const A={};
+SCHED.addresses.forEach(x=>{A[x.id]=[x.address,x.entrance||""]});
 // g: группа, d: день (1=Пн), t: время, a: адрес, type: in|online|hybrid, note, link
-const M=[
- {g:"preo",d:1,t:"11:00",a:"volod",note:"Закрытое собрание"},
- {g:"path",d:1,t:"19:00",a:"narod"},
- {g:"nash",d:1,t:"19:00",a:"tuh"},
- {g:"vost",d:2,t:"17:00",a:"prih",note:"1-й и 3-й вторник месяца открытое, 2-й и 4-й закрытое"},
- {g:"prim",d:2,t:"18:30",type:"online",link:"https://telemost.yandex.ru/j/20585078874138",plat:"Яндекс Телемост",note:"Временно только онлайн. Последний вторник месяца — открытое собрание"},
- {g:"fun",d:2,t:"19:00",a:"narod"},
- {g:"vtor",d:2,t:"19:00",a:"rus"},
- {g:"welc",d:3,t:"18:00",a:"gog5",note:"Последняя среда месяца закрытое"},
- {g:"nash",d:3,t:"19:00",a:"tuh"},
- {g:"path",d:4,t:"19:00",a:"narod"},
- {g:"vtor",d:4,t:"19:00",a:"rus"},
- {g:"bereg",d:5,t:"18:30",a:"gogz",note:"4-я пятница месяца открытое"},
- {g:"preo",d:6,t:"10:00",a:"volod",note:"Последняя суббота месяца открытое, остальные закрытые"},
- {g:"vtor",d:6,t:"19:00",a:"rus"},
- {g:"joy",d:7,t:"14:00",a:"chern"},
- {g:"mayak",d:7,t:"15:00",a:"kal",note:"Последнее воскресенье месяца закрытое"},
- {g:"nash",d:7,t:"18:00",a:"tuh"},
- {g:"par",d:2,t:"19:00",a:"has4"},
- {g:"nad",d:5,t:"19:00",a:"has"},
- {g:"np",d:3,t:"19:00",a:"lun"},
- {g:"briz",d:6,t:"17:00",a:"sen"},
- {g:"resh",d:5,t:"19:00",a:"len"},
- {g:"pier",d:1,t:"18:00",a:"geo",type:"hybrid",link:MAX,plat:"MAX"},
- {g:"pier",d:3,t:"18:00",a:"men"},
- {g:"pier",d:5,t:"18:00",a:"geo",type:"hybrid",link:MAX,plat:"MAX"},
- {g:"kam",d:1,t:"19:00",a:"km"},
- {g:"kras",d:2,t:"18:00",a:"krasdk"},
- {g:"kras",d:4,t:"18:00",a:"krasdk"}
-];
-// «Ветер Перемен онлайн»: время на сайте московское, здесь храним как московское
-const VETER_MSK={1:["07:00","13:00"],2:["06:30","13:00"],3:["07:00","13:00"],4:["06:30","13:00"],5:["07:00","13:00"],6:["07:00","13:00"],7:["07:00","13:00"]};
+const M=SCHED.meetings.filter(m=>GROUPS[m.group]).map(m=>{const r={g:m.group,d:+m.day,t:m.time};if(m.address)r.a=m.address;if(m.format&&m.format!=="in")r.type=m.format;if(m.link)r.link=m.link;if(m.platform)r.plat=m.platform;if(m.note)r.note=m.note;return r});
 const EVENTS=window.AA_NEWS;
 const CAL_EVENTS=EVENTS.flatMap(e=>[...(e.eventDates||[]).map(date=>({...e,eventDate:date})),...(e.relatedEvents||[])]);
 
@@ -93,12 +24,16 @@ function nowVl(){                                // текущее время в
   const u=new Date(); const x=new Date(u.getTime()+VL_OFFSET*3600e3);
   return {day:x.getUTCDay()||7, min:x.getUTCHours()*60+x.getUTCMinutes()};
 }
-// добавляем онлайн-собрания «Ветра Перемен» во владивостокском времени
-const SHIFT=(VL_OFFSET-MSK_OFFSET)*60;
-for(const d in VETER_MSK) for(const t of VETER_MSK[d]){
-  const v=mins(t)+SHIFT;                          // +7 ч, день не меняется
-  M.push({g:"veter",d:+d,t:fmt(v),type:"online",link:VETER,plat:"Zoom",note:t+" по Москве. ID 4513655750, код 283176"});
-}
+// онлайн-группы из content/online.json: время хранится в своём поясе (MSK или VL), в расписание — по Владивостоку
+const TZ_OFFSET={MSK:3,VL:10};
+ONLINE.filter(o=>o.inSchedule).forEach(o=>{
+  GROUPS[o.id]={name:o.name,city:"Онлайн",tags:[],allOpen:false};
+  const shift=(VL_OFFSET-(TZ_OFFSET[o.tz]??VL_OFFSET))*60;
+  (o.times||[]).forEach(x=>x.days.forEach(d=>{
+    const v=mins(x.time)+shift;
+    M.push({g:o.id,d:((+d-1+Math.floor(v/1440))%7+7)%7+1,t:fmt(v),type:"online",link:o.link,plat:o.platform,note:o.tz==="MSK"?x.time+" по Москве"+(o.access?". "+o.access:""):(o.access||"")});
+  }));
+});
 M.forEach(m=>{m.type=m.type||"in"; m.grp=GROUPS[m.g]; m.city=m.grp.city;});
 
 function until(m,now){                            // минут до ближайшего начала; идущее сейчас (до 60 мин) = отрицательное
@@ -206,25 +141,31 @@ function renderDays(){
 
 /* ---------- ОНЛАЙН ---------- */
 function renderOnline(){
-  const loc=(mskT)=>{const[h,m]=mskT.split(":").map(Number);const u=new Date();
-    return new Date(Date.UTC(u.getUTCFullYear(),u.getUTCMonth(),u.getUTCDate(),h-MSK_OFFSET,m)).toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit",timeZone:"Asia/Vladivostok"})};
-  $("#ogrid").innerHTML=`
-  <article class="ocard"><h3>aa24.online</h3><div class="big">Круглосуточно</div>
-    <dl><dt>Когда</dt><dd>каждые 2 часа, ближайшие: ${[0,2,4].map(k=>{const u=new Date();let h=(u.getUTCHours()+MSK_OFFSET)%24;let n=h+1;if(n%2)n++;return loc(pad((n+k)%24)+":00")}).join(", ")}</dd>
-    <dt>Где</dt><dd>Zoom, пароль 451534</dd></dl>
-    <a class="btn online small" href="https://zoom.us/j/725744058" target="_blank" rel="noopener">Подключиться</a></article>
-  <article class="ocard"><h3>Ветер Перемен онлайн</h3><div class="big">${loc("07:00")} и ${loc("13:00")}</div>
-    <dl><dt>Когда</dt><dd>каждый день; во вторник и четверг первое собрание в ${loc("06:30")}</dd>
-    <dt>Где</dt><dd>Zoom, ID 4513655750, код 283176</dd></dl>
-    <a class="btn online small" href="${VETER}" target="_blank" rel="noopener">Подключиться</a></article>
-  <article class="ocard"><h3>Пристань 611, Дальнегорск</h3><div class="big">Пн и Пт, 18:00</div>
-    <dl><dt>Когда</dt><dd>время владивостокское, одновременно с очным собранием</dd>
-    <dt>Где</dt><dd>мессенджер MAX</dd></dl>
-    <a class="btn online small" href="${MAX}" target="_blank" rel="noopener">Подключиться</a></article>
-  <article class="ocard"><h3>Приморочка, женская группа</h3><div class="big">Вт, 18:30</div>
-    <dl><dt>Когда</dt><dd>время владивостокское; временно только онлайн</dd>
-    <dt>Где</dt><dd>Яндекс Телемост</dd></dl>
-    <a class="btn online small" href="https://telemost.yandex.ru/j/20585078874138" target="_blank" rel="noopener">Подключиться</a></article>`;
+  const esc=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);
+  const toVl=(t,tz)=>{const[h,m]=t.split(":").map(Number);const u=new Date();
+    return new Date(Date.UTC(u.getUTCFullYear(),u.getUTCMonth(),u.getUTCDate(),h-(TZ_OFFSET[tz]??VL_OFFSET),m)).toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit",timeZone:"Asia/Vladivostok"})};
+  const fill=(text,tz)=>esc(text).replace(/\{(\d{1,2}:\d{2})\}/g,(_,t)=>toVl(t,tz));
+  const where=p=>p==="MAX"?"мессенджер MAX":p;
+  const card=(title,big,when,whereText,link)=>`<article class="ocard"><h3>${esc(title)}</h3><div class="big">${big}</div>
+    <dl><dt>Когда</dt><dd>${when}</dd>
+    <dt>Где</dt><dd>${esc(whereText)}</dd></dl>
+    ${link?`<a class="btn online small" href="${esc(link)}" target="_blank" rel="noopener">Подключиться</a>`:""}</article>`;
+  const cards=ONLINE.map(o=>{
+    let big=o.big?fill(o.big,o.tz):"",when=o.when?fill(o.when,o.tz):"";
+    if(o.everyHours){const step=o.everyHours,off=TZ_OFFSET[o.tz]??VL_OFFSET,u=new Date();const h=(u.getUTCHours()+off)%24;let n=h+1;while(n%step)n++;
+      when=(when?when+"; ":"")+`каждые ${step} часа, ближайшие: `+[0,1,2].map(k=>toVl(pad((n+k*step)%24)+":00",o.tz)).join(", ");if(!big)big="Круглосуточно"}
+    if(!big){const times=[...new Set((o.times||[]).map(x=>toVl(x.time,o.tz)))].sort();big=times.join(" и ")}
+    return card(o.name,big,when,[where(o.platform),o.access].filter(Boolean).join(", "),o.link)});
+  // группы, у которых есть онлайн-собрания (очно и онлайн или только онлайн)
+  const seen=new Map();
+  M.filter(m=>(m.type==="online"||m.type==="hybrid")&&m.grp.city!=="Онлайн").forEach(m=>{const k=m.g+"|"+m.t+"|"+m.type+"|"+(m.link||"");if(!seen.has(k))seen.set(k,{m,days:[]});seen.get(k).days.push(m.d)});
+  [...seen.values()].sort((a,b)=>Math.min(...a.days)-Math.min(...b.days)||mins(a.m.t)-mins(b.m.t)).forEach(({m,days})=>{
+    const g=m.grp,title=g.name+(g.city!=="Владивосток"?", "+g.city:"")+((g.tags||[]).includes("женская")?", женская группа":"");
+    const dayText=[...new Set(days)].sort().map(d=>DSHORT[d]).join(" и ");
+    const when=m.type==="hybrid"?"время владивостокское, одновременно с очным собранием":"время владивостокское"+(g.onlineNote?"; "+esc(g.onlineNote):"");
+    cards.push(card(title,dayText+", "+m.t,when,where(m.plat||"онлайн"),m.link));
+  });
+  $("#ogrid").innerHTML=cards.join("\n");
 }
 
 /* ---------- СОБЫТИЯ ---------- */
