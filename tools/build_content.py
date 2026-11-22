@@ -11,8 +11,8 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent / 'v2' / 'content'
-PARTS = ['schedule', 'online', 'news', 'contacts', 'selftest', 'readings', 'settings']
-# speakers.json в общий файл не входит: сайт загружает его только после ввода пароля
+PARTS = ['schedule', 'online', 'news', 'contacts', 'selftest', 'settings']
+# speakers.json (после ввода пароля) и readings.json (большой архив) сайт загружает отдельно
 
 
 def main():
@@ -24,6 +24,7 @@ def main():
         except Exception as error:  # не собираем сайт из битых данных
             sys.exit(f'Ошибка в {path.name}: {error}. content.js не изменён.')
     data['settings']['speakersVersion'] = hashlib.sha1((ROOT / 'speakers.json').read_bytes()).hexdigest()[:10]
+    data['settings']['readingsVersion'] = hashlib.sha1((ROOT / 'readings.json').read_bytes()).hexdigest()[:10]
     data['settings'].pop('speakersPasswordNote', None)
     payload = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
     out = ROOT / 'content.js'

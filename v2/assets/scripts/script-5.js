@@ -4,7 +4,7 @@
  let lastToday=today(),request=0;input.value=lastToday;input.max=lastToday;
  const cache=new Map();
  let archive={};
- archive=((window.AA_CONTENT||{}).readings)||{};
+ const archiveReady=fetch('content/readings.json?v='+encodeURIComponent((((window.AA_CONTENT||{}).settings)||{}).readingsVersion||'')).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{archive=d}).catch(()=>{});
  const quotePage=document.querySelector('.reading-quote'),wide=matchMedia('(min-width:821px)');
  function arrangePages(){
    const quote=quotePage.querySelector('blockquote');
@@ -24,6 +24,7 @@
    if(fetchController)fetchController.abort();
    const controller=new AbortController();fetchController=controller;
    try{
+     await archiveReady;
      let post=cache.get(value)||archive[value.slice(5)];
      if(!post)throw Error('no-reading');
      if(id!==request)return;
