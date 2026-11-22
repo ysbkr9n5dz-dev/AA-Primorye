@@ -5,12 +5,14 @@
 content.js — производный файл: сайт загружает его до остальных скриптов.
 Запуск: python3 tools/build_content.py  (из корня репозитория)
 """
+import hashlib
 import json
 import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent / 'v2' / 'content'
-PARTS = ['schedule', 'online', 'news', 'speakers', 'contacts', 'selftest', 'readings']
+PARTS = ['schedule', 'online', 'news', 'contacts', 'selftest', 'readings', 'settings']
+# speakers.json в общий файл не входит: сайт загружает его только после ввода пароля
 
 
 def main():
@@ -21,6 +23,8 @@ def main():
             data[name] = json.loads(path.read_text(encoding='utf-8'))
         except Exception as error:  # не собираем сайт из битых данных
             sys.exit(f'Ошибка в {path.name}: {error}. content.js не изменён.')
+    data['settings']['speakersVersion'] = hashlib.sha1((ROOT / 'speakers.json').read_bytes()).hexdigest()[:10]
+    data['settings'].pop('speakersPasswordNote', None)
     payload = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
     out = ROOT / 'content.js'
     tmp = out.with_suffix('.tmp')

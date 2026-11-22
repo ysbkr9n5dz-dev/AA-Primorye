@@ -1,13 +1,52 @@
 (() => {
 const stylesheet = new URL('speakers.css?v=20261123a', document.currentScript.src).href;
-const records = ((window.AA_CONTENT || {}).speakers || []);
+let records = [];
 class AASpeakers extends HTMLElement {
   static get observedAttributes() { return ['collapsed']; }
   attributeChangedCallback() { this.refreshMini?.(); }
   connectedCallback() {
     if (this.shadowRoot) return;
+    this.attachShadow({mode:'open'});
+    this.gate();
+  }
+  async load() {
+    const settings = (window.AA_CONTENT || {}).settings || {};
+    const r = await fetch('content/speakers.json?v=' + encodeURIComponent(settings.speakersVersion || ''), {cache:'no-cache'});
+    if (!r.ok) throw Error(r.status);
+    records = (await r.json()).filter(x => !x.hidden);
+  }
+  async open() {
+    try { await this.load(); } catch (e) { this.shadowRoot.innerHTML = '<p style="padding:48px 24px;font:16px/1.5 Arial,sans-serif;color:#1c3b7d">Не удалось загрузить записи. Проверьте интернет и обновите страницу.</p>'; return; }
+    this.shadowRoot.replaceChildren();
+    this.build();
+  }
+  async gate() {
+    const settings = (window.AA_CONTENT || {}).settings || {};
+    const hash = settings.speakersPasswordSha256;
+    let ok = !hash;
+    try { if (hash && sessionStorage.getItem('aa-speakers-key') === hash) ok = true; } catch (e) {}
+    if (ok) return this.open();
+    const root = this.shadowRoot;
+    const style = document.createElement('link'); style.rel = 'stylesheet'; style.href = stylesheet;
+    root.innerHTML = `<section class="speakers-page speakers-locked"><div class="wrap"><div class="speakers-gate">
+<span class="eyebrow">ЖИВОЙ ОПЫТ СОДРУЖЕСТВА</span><h2>Спикерские</h2>
+<p>Записи выступлений доступны членам содружества. Пароль можно узнать у служащего группы или по телефону доверия.</p>
+<form id="gate-form" autocomplete="off"><label for="gate-pass">Пароль</label><div class="gate-row"><input id="gate-pass" type="password" inputmode="numeric" required><button type="submit" class="gate-btn">Открыть</button></div><p id="gate-error" class="gate-error" role="alert" hidden>Неверный пароль. Попробуйте ещё раз.</p></form>
+</div></div></section>`;
+    root.prepend(style);
+    const form = root.getElementById('gate-form'), input = root.getElementById('gate-pass'), err = root.getElementById('gate-error');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input.value.trim()));
+      const hex = [...new Uint8Array(bytes)].map(b => b.toString(16).padStart(2, '0')).join('');
+      if (hex !== hash) { err.hidden = false; input.select(); return; }
+      try { sessionStorage.setItem('aa-speakers-key', hash); } catch (e) {}
+      this.open();
+    });
+  }
+  build() {
     const host = this;
-    const root = this.attachShadow({mode:'open'});
+    const root = this.shadowRoot;
     const style = document.createElement('link');
     style.rel = 'stylesheet';
     style.href = stylesheet;
