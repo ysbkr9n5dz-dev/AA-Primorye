@@ -1,11 +1,14 @@
 (() => {
   const pageIds=['home','daily','home-events','schedule','online','newcomer','about','calendar','phones','events','library','reader'];
-  const routes={home:['home','daily','home-events'],schedule:['schedule'],online:['online'],newcomer:['newcomer'],about:['about'],calendar:['calendar'],phones:['phones'],events:['events'],library:['library'],journals:['library'],reader:['reader']};
+  const routes={home:['home','daily','home-events'],schedule:['schedule'],online:['online'],newcomer:['newcomer'],about:['about'],calendar:['calendar'],phones:['phones'],events:['events'],library:['library'],journals:['library'],reader:['reader'],speakers:[]};
   const dateVl=()=>new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Vladivostok'}));
   let cursor=dateVl(); cursor=new Date(cursor.getFullYear(),cursor.getMonth(),1); let selected=null;
   function paintRoute(){
     let id=location.hash.slice(1)||'home'; if(id==='top') id='home'; if(!routes[id]) id='home';
     pageIds.forEach(key=>{let el=document.getElementById(key);if(el)el.hidden=!routes[id].includes(key)});
+    const speakers=document.getElementById('speakers');
+    speakers.toggleAttribute('collapsed',id!=='speakers');
+    if(id==='speakers')speakers.focus({preventScroll:true});
     document.querySelectorAll('.committee').forEach(el=>el.hidden=true);
     document.querySelectorAll('.main a,.mobile-nav a').forEach(a=>{let active=a.getAttribute('href')==='#'+id;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
     if(id==='calendar')renderCalendar();
