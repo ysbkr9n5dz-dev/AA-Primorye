@@ -26,7 +26,15 @@
    try{
      await archiveReady;
      let post=cache.get(value)||archive[value.slice(5)];
-     if(!post)throw Error('no-reading');
+     if(!post){ // дня ещё нет в архиве — запасной путь: берём с aa25.ru, пока бот не пополнил архив
+       const timer=setTimeout(()=>controller.abort(),12000);
+       try{
+         const response=await fetch(`https://aa25.ru/wp-json/wp/v2/posts?slug=${encodeURIComponent(`${d}-${months[m-1]}`)}&per_page=20&_fields=title,content,link,date`,{signal:controller.signal});
+         if(!response.ok)throw Error();
+         const data=await response.json();post=data.find(p=>p.title?.rendered?.toLowerCase().includes(`${d} ${months[m-1]}`));
+         if(!post)throw Error();cache.set(value,post);
+       }finally{clearTimeout(timer)}
+     }
      if(id!==request)return;
      const fragment=safeContent(post.content.rendered);
      const commit=()=>{

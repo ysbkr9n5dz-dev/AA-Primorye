@@ -7,7 +7,7 @@ on:
       - .github/scripts/sync-v2-readings.py
       - tools/build_content.py
   schedule:
-    - cron: '15 14,16 * * *'
+    - cron: '20 */3 * * *'
   workflow_dispatch:
 permissions:
   contents: write
